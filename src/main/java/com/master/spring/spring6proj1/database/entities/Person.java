@@ -2,10 +2,33 @@ package com.master.spring.spring6proj1.database.entities;
 
 import java.util.Date;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+
+/**
+ * <code>@Entitiy</code> already maps the annotated class to a corresponding
+ * table name, so there is no need to write <code>@Table(name = "person")</code>
+ * 
+ * @author aadel
+ *
+ */
+@Entity
 public class Person {
 
+	/**
+	 * Here also JPA by default maps the fields to their column names. There is no
+	 * need to write <code>@Column</code>
+	 */
+	@Column(nullable = false)
+	@Id
+	@GeneratedValue
 	private int id;
+
+	@Column(nullable = false)
 	private String name;
+
 	private String location;
 	private Date birthDate;
 
@@ -13,12 +36,16 @@ public class Person {
 		super();
 	}
 
-	public Person(int id, String name, String location, Date birthDate) {
+	public Person(String name, String location, Date birthDate) {
 		this();
-		this.id = id;
 		this.name = name;
 		this.location = location;
 		this.birthDate = birthDate;
+	}
+
+	public Person(int id, String name, String location, Date birthDate) {
+		this(name, location, birthDate);
+		this.id = id;
 	}
 
 	public int getId() {

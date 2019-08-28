@@ -1,5 +1,7 @@
 package com.master.spring.spring6proj1.main;
 
+import java.util.Calendar;
+import java.util.GregorianCalendar;
 import java.util.List;
 
 import org.slf4j.Logger;
@@ -32,14 +34,29 @@ public class Spring6proj1Application implements CommandLineRunner {
 		for (Person person : persons) {
 			logger.info("personJdbcDao.findAll() -> {}", person);
 		}
+
 		logger.info("personJdbcDao.findById(100001) -> {}", personJdbcDao.findById(100001));
 		logger.info("personJdbcDao.findByName(Lotfi) -> {}", personJdbcDao.findByName("Lotfi"));
 		logger.info("personJdbcDao.findByLocation(UK) -> {}", personJdbcDao.findByLocation("UK"));
 		logger.info("personJdbcDao.deleteById(100002), rows deleted: {}", personJdbcDao.deleteById(100002));
+
 		persons = personJdbcDao.findAll();
 		for (Person person : persons) {
 			logger.info("personJdbcDao.findAll() -> {}", person);
 		}
+
+		Person nour = new Person(100005, "Nour", "UAE", new GregorianCalendar(2005, Calendar.JUNE, 17).getTime());
+		logger.info("personJdbcDao.insert(), rows affected: {}", personJdbcDao.insert(nour));
+
+		Person abdo = personJdbcDao.findById(100001);
+		abdo.setLocation("UAE");
+		logger.info("personJdbcDao.update(), rows affected: {}", personJdbcDao.update(abdo));
+
+		persons = personJdbcDao.findAll();
+		for (Person person : persons) {
+			logger.info("personJdbcDao.findAll() -> {}", person);
+		}
+
 	}
 
 }

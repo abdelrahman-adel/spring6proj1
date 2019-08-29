@@ -45,7 +45,7 @@ public class Spring6proj1Application implements CommandLineRunner {
 			logger.info("personJdbcDao.findAll() -> {}", person);
 		}
 
-		Person nour = new Person(100005, "Nour", "UAE", new GregorianCalendar(2005, Calendar.JUNE, 17).getTime());
+		Person nour = new Person(100006, "Nour", "UAE", new GregorianCalendar(2005, Calendar.JUNE, 17).getTime());
 		logger.info("personJdbcDao.insert(), rows affected: {}", personJdbcDao.insert(nour));
 
 		Person abdo = personJdbcDao.findById(100001);

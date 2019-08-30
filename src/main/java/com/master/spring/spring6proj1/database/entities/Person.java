@@ -6,6 +6,8 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 
 /**
  * <code>@Entitiy</code> already maps the annotated class to a corresponding
@@ -15,6 +17,9 @@ import javax.persistence.Id;
  *
  */
 @Entity
+@NamedQueries(value = { @NamedQuery(name = "findAll", query = "select p from Person p"),
+		@NamedQuery(name = "findByName", query = "select p from Person p where name=:name"),
+		@NamedQuery(name = "findByLocation", query = "select p from Person p where location=:location") })
 public class Person {
 
 	/**

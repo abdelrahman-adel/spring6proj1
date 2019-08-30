@@ -3,6 +3,7 @@ package com.master.spring.spring6proj1.main;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.List;
+import java.util.Optional;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -36,8 +37,8 @@ public class SpringData6proj1Application implements CommandLineRunner {
 		}
 
 		logger.info("personRepository.findById(100001) -> {}", personRepository.findById(100001));
-		logger.info("personRepository.findByName(Lotfi) -> {}", personRepository.findByName("Lotfi"));
-		logger.info("personRepository.findByLocation(UK) -> {}", personRepository.findByLocation("UK"));
+//		logger.info("personRepository.findByName(Lotfi) -> {}", personRepository.findByName("Lotfi"));
+//		logger.info("personRepository.findByLocation(UK) -> {}", personRepository.findByLocation("UK"));
 		personRepository.deleteById(100002);
 		logger.info("personRepository.deleteById(100002), deleted 100002");
 
@@ -49,9 +50,9 @@ public class SpringData6proj1Application implements CommandLineRunner {
 		Person nour = new Person("Nour", "UAE", new GregorianCalendar(2005, Calendar.JUNE, 17).getTime());
 		logger.info("personRepository.insert(), row inserted: {}", personRepository.save(nour));
 
-		Person abdo = personRepository.findById(100001);
-		abdo.setLocation("UAE");
-		logger.info("personRepository.update(), row updated: {}", personRepository.save(abdo));
+		Optional<Person> abdo = personRepository.findById(100001);
+		abdo.get().setLocation("UAE");
+		logger.info("personRepository.update(), row updated: {}", personRepository.save(abdo.get()));
 
 		persons = personRepository.findAll();
 		for (Person person : persons) {

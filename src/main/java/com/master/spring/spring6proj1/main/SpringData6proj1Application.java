@@ -9,21 +9,23 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.autoconfigure.domain.EntityScan;
 
 import com.master.spring.spring6proj1.database.entities.Person;
-import com.master.spring.spring6proj1.database.jpa.PersonJpaRepository;
+import com.master.spring.spring6proj1.database.springdata.PersonSpringDataRepository;
 
-//@EntityScan(basePackages = "com.master.spring.spring6proj1.database.entities")
-//@SpringBootApplication(scanBasePackages = "com.master.spring.spring6proj1")
-public class SpringJpa6proj1Application implements CommandLineRunner {
+@EntityScan(basePackages = "com.master.spring.spring6proj1.database.entities")
+@SpringBootApplication(scanBasePackages = "com.master.spring.spring6proj1")
+public class SpringData6proj1Application implements CommandLineRunner {
 
 	@Autowired
-	PersonJpaRepository personRepository;
+	PersonSpringDataRepository personRepository;
 
 	Logger logger = LoggerFactory.getLogger(this.getClass());
 
 	public static void main(String[] args) {
-		SpringApplication.run(SpringJpa6proj1Application.class, args);
+		SpringApplication.run(SpringData6proj1Application.class, args);
 	}
 
 	@Override
@@ -45,11 +47,11 @@ public class SpringJpa6proj1Application implements CommandLineRunner {
 		}
 
 		Person nour = new Person("Nour", "UAE", new GregorianCalendar(2005, Calendar.JUNE, 17).getTime());
-		logger.info("personRepository.insert(), row inserted: {}", personRepository.insert(nour));
+		logger.info("personRepository.insert(), row inserted: {}", personRepository.save(nour));
 
 		Person abdo = personRepository.findById(100001);
 		abdo.setLocation("UAE");
-		logger.info("personRepository.update(), row updated: {}", personRepository.update(abdo));
+		logger.info("personRepository.update(), row updated: {}", personRepository.save(abdo));
 
 		persons = personRepository.findAll();
 		for (Person person : persons) {

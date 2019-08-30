@@ -33,8 +33,9 @@ public class PersonJpaRepository {
 		return findByName.getResultList();
 	}
 
-	public List<Person> findByLocation(String string) {
+	public List<Person> findByLocation(String location) {
 		TypedQuery<Person> findByLocation = entityManager.createNamedQuery("findByLocation", Person.class);
+		findByLocation.setParameter("location", location);
 		return findByLocation.getResultList();
 	}
 

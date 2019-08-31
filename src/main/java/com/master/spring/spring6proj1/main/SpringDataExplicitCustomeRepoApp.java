@@ -16,6 +16,7 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
 import com.master.spring.spring6proj1.database.entities.Person;
 import com.master.spring.spring6proj1.database.springdata.PersonSpringDataExplicitCustomeRepository;
+import com.master.spring.spring6proj1.database.springdata.PersonSpringDataExplicitCustomeRepositoryImpl;
 
 /**
  * We need <code>@EntityScan</code> to give it the package where it should scan
@@ -28,7 +29,7 @@ import com.master.spring.spring6proj1.database.springdata.PersonSpringDataExplic
  *
  */
 @EntityScan(basePackages = "com.master.spring.spring6proj1.database.entities")
-@EnableJpaRepositories(basePackages = "com.master.spring.spring6proj1")
+@EnableJpaRepositories(basePackages = "com.master.spring.spring6proj1", repositoryBaseClass = PersonSpringDataExplicitCustomeRepositoryImpl.class)
 @SpringBootApplication(scanBasePackages = "com.master.spring.spring6proj1")
 public class SpringDataExplicitCustomeRepoApp implements CommandLineRunner {
 

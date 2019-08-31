@@ -14,7 +14,7 @@ import com.master.spring.spring6proj1.database.entities.Person;
 import com.master.spring.spring6proj1.database.jdbc.PersonJdbcDao;
 
 //@SpringBootApplication(scanBasePackages = "com.master.spring.spring6proj1")
-public class SpringJdbc6proj1Application implements CommandLineRunner {
+public class SpringJdbcApp implements CommandLineRunner {
 
 	@Autowired
 	PersonJdbcDao personDao;
@@ -22,7 +22,7 @@ public class SpringJdbc6proj1Application implements CommandLineRunner {
 	Logger logger = LoggerFactory.getLogger(this.getClass());
 
 	public static void main(String[] args) {
-		SpringApplication.run(SpringJdbc6proj1Application.class, args);
+		SpringApplication.run(SpringJdbcApp.class, args);
 	}
 
 	@Override

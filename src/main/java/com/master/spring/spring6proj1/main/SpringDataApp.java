@@ -10,15 +10,24 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
-import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.boot.autoconfigure.domain.EntityScan;
 
 import com.master.spring.spring6proj1.database.entities.Person;
 import com.master.spring.spring6proj1.database.springdata.PersonSpringDataRepository;
 
-@EntityScan(basePackages = "com.master.spring.spring6proj1.database.entities")
-@SpringBootApplication(scanBasePackages = "com.master.spring.spring6proj1")
-public class SpringData6proj1Application implements CommandLineRunner {
+/**
+ * We need <code>@EntityScan</code> to give it the package where it should scan
+ * for entites.
+ * 
+ * We need <code>@EnableJpaRepositories</code> to give it the package where it
+ * should scan for predefined entities.
+ * 
+ * @author Abd-Elrahman Adel
+ *
+ */
+//@EntityScan(basePackages = "com.master.spring.spring6proj1.database.entities")
+//@EnableJpaRepositories(basePackages = "com.master.spring.spring6proj1")
+//@SpringBootApplication(scanBasePackages = "com.master.spring.spring6proj1")
+public class SpringDataApp implements CommandLineRunner {
 
 	@Autowired
 	PersonSpringDataRepository personRepository;
@@ -26,7 +35,7 @@ public class SpringData6proj1Application implements CommandLineRunner {
 	Logger logger = LoggerFactory.getLogger(this.getClass());
 
 	public static void main(String[] args) {
-		SpringApplication.run(SpringData6proj1Application.class, args);
+		SpringApplication.run(SpringDataApp.class, args);
 	}
 
 	@Override

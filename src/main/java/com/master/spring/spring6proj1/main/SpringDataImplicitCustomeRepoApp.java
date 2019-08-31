@@ -3,6 +3,7 @@ package com.master.spring.spring6proj1.main;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.List;
+import java.util.Optional;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -11,19 +12,30 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 
 import com.master.spring.spring6proj1.database.entities.Person;
-import com.master.spring.spring6proj1.database.jpa.PersonJpaRepository;
+import com.master.spring.spring6proj1.database.springdata.PersonSpringDataImplicitCustomeRepository;
 
+/**
+ * We need <code>@EntityScan</code> to give it the package where it should scan
+ * for entites.
+ * 
+ * We need <code>@EnableJpaRepositories</code> to give it the package where it
+ * should scan for predefined entities.
+ * 
+ * @author Abd-Elrahman Adel
+ *
+ */
 //@EntityScan(basePackages = "com.master.spring.spring6proj1.database.entities")
+//@EnableJpaRepositories(basePackages = "com.master.spring.spring6proj1")
 //@SpringBootApplication(scanBasePackages = "com.master.spring.spring6proj1")
-public class SpringJpa6proj1Application implements CommandLineRunner {
+public class SpringDataImplicitCustomeRepoApp implements CommandLineRunner {
 
 	@Autowired
-	PersonJpaRepository personRepository;
+	PersonSpringDataImplicitCustomeRepository personRepository;
 
 	Logger logger = LoggerFactory.getLogger(this.getClass());
 
 	public static void main(String[] args) {
-		SpringApplication.run(SpringJpa6proj1Application.class, args);
+		SpringApplication.run(SpringDataImplicitCustomeRepoApp.class, args);
 	}
 
 	@Override
@@ -45,16 +57,22 @@ public class SpringJpa6proj1Application implements CommandLineRunner {
 		}
 
 		Person nour = new Person("Nour", "UAE", new GregorianCalendar(2005, Calendar.JUNE, 17).getTime());
-		logger.info("personRepository.insert(), row inserted: {}", personRepository.insert(nour));
+		logger.info("personRepository.insert(), row inserted: {}", personRepository.save(nour));
 
-		Person abdo = personRepository.findById(100001);
-		abdo.setLocation("UAE");
-		logger.info("personRepository.update(), row updated: {}", personRepository.update(abdo));
+		Optional<Person> abdo = personRepository.findById(100001);
+		abdo.get().setLocation("UAE");
+		logger.info("personRepository.update(), row updated: {}", personRepository.save(abdo.get()));
 
 		persons = personRepository.findAll();
 		for (Person person : persons) {
 			logger.info("personRepository.findAll() -> {}", person);
 		}
+
+		logger.info("personRepository.findByBirthDate(2005-06-17 00:00:00.0) -> {}",
+				personRepository.findByBirthDate(new GregorianCalendar(2005, Calendar.JUNE, 17).getTime()));
+
+		logger.info("personRepository.findByNameAndLocation(Mohamed Sameh, Sudan) -> {}",
+				personRepository.findByNameAndLocation("Mohamed Sameh", "Sudan"));
 
 	}
 

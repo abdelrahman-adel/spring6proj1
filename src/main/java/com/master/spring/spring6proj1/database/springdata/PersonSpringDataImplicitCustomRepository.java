@@ -17,7 +17,7 @@ import com.master.spring.spring6proj1.database.entities.Person;
  * @author Abd-Elrahman Adel
  *
  */
-public interface PersonSpringDataExplicitCustomeRepository extends JpaRepository<Person, Integer> {
+public interface PersonSpringDataImplicitCustomRepository extends JpaRepository<Person, Integer> {
 
 	Person findByName(String name);
 

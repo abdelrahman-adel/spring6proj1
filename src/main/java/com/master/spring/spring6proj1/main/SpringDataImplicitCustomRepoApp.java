@@ -12,7 +12,7 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 
 import com.master.spring.spring6proj1.database.entities.Person;
-import com.master.spring.spring6proj1.database.springdata.PersonSpringDataImplicitCustomeRepository;
+import com.master.spring.spring6proj1.database.springdata.PersonSpringDataImplicitCustomRepository;
 
 /**
  * We need <code>@EntityScan</code> to give it the package where it should scan
@@ -27,51 +27,51 @@ import com.master.spring.spring6proj1.database.springdata.PersonSpringDataImplic
 //@EntityScan(basePackages = "com.master.spring.spring6proj1.database.entities")
 //@EnableJpaRepositories(basePackages = "com.master.spring.spring6proj1")
 //@SpringBootApplication(scanBasePackages = "com.master.spring.spring6proj1")
-public class SpringDataImplicitCustomeRepoApp implements CommandLineRunner {
+public class SpringDataImplicitCustomRepoApp implements CommandLineRunner {
 
 	@Autowired
-	PersonSpringDataImplicitCustomeRepository personRepository;
+	PersonSpringDataImplicitCustomRepository personRepository;
 
 	Logger logger = LoggerFactory.getLogger(this.getClass());
 
 	public static void main(String[] args) {
-		SpringApplication.run(SpringDataImplicitCustomeRepoApp.class, args);
+		SpringApplication.run(SpringDataImplicitCustomRepoApp.class, args);
 	}
 
 	@Override
 	public void run(String... args) throws Exception {
 		List<Person> persons = personRepository.findAll();
 		for (Person person : persons) {
-			logger.info("personRepository.findAll() -> {}", person);
+			logger.info("personSpringDataExplicitCustomRepository.findAll() -> {}", person);
 		}
 
-		logger.info("personRepository.findById(100001) -> {}", personRepository.findById(100001));
-		logger.info("personRepository.findByName(Lotfi) -> {}", personRepository.findByName("Lotfi"));
-		logger.info("personRepository.findByLocation(UK) -> {}", personRepository.findByLocation("UK"));
+		logger.info("personSpringDataExplicitCustomRepository.findById(100001) -> {}", personRepository.findById(100001));
+		logger.info("personSpringDataExplicitCustomRepository.findByName(Lotfi) -> {}", personRepository.findByName("Lotfi"));
+		logger.info("personSpringDataExplicitCustomRepository.findByLocation(UK) -> {}", personRepository.findByLocation("UK"));
 		personRepository.deleteById(100002);
-		logger.info("personRepository.deleteById(100002), deleted 100002");
+		logger.info("personSpringDataExplicitCustomRepository.deleteById(100002), deleted 100002");
 
 		persons = personRepository.findAll();
 		for (Person person : persons) {
-			logger.info("personRepository.findAll() -> {}", person);
+			logger.info("personSpringDataExplicitCustomRepository.findAll() -> {}", person);
 		}
 
 		Person nour = new Person("Nour", "UAE", new GregorianCalendar(2005, Calendar.JUNE, 17).getTime());
-		logger.info("personRepository.insert(), row inserted: {}", personRepository.save(nour));
+		logger.info("personSpringDataExplicitCustomRepository.insert(), row inserted: {}", personRepository.save(nour));
 
 		Optional<Person> abdo = personRepository.findById(100001);
 		abdo.get().setLocation("UAE");
-		logger.info("personRepository.update(), row updated: {}", personRepository.save(abdo.get()));
+		logger.info("personSpringDataExplicitCustomRepository.update(), row updated: {}", personRepository.save(abdo.get()));
 
 		persons = personRepository.findAll();
 		for (Person person : persons) {
-			logger.info("personRepository.findAll() -> {}", person);
+			logger.info("personSpringDataExplicitCustomRepository.findAll() -> {}", person);
 		}
 
-		logger.info("personRepository.findByBirthDate(2005-06-17 00:00:00.0) -> {}",
+		logger.info("personSpringDataExplicitCustomRepository.findByBirthDate(2005-06-17 00:00:00.0) -> {}",
 				personRepository.findByBirthDate(new GregorianCalendar(2005, Calendar.JUNE, 17).getTime()));
 
-		logger.info("personRepository.findByNameAndLocation(Mohamed Sameh, Sudan) -> {}",
+		logger.info("personSpringDataExplicitCustomRepository.findByNameAndLocation(Mohamed Sameh, Sudan) -> {}",
 				personRepository.findByNameAndLocation("Mohamed Sameh", "Sudan"));
 
 	}

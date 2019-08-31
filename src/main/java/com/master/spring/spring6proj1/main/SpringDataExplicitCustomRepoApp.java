@@ -15,8 +15,7 @@ import org.springframework.boot.autoconfigure.domain.EntityScan;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
 import com.master.spring.spring6proj1.database.entities.Person;
-import com.master.spring.spring6proj1.database.springdata.PersonSpringDataExplicitCustomRepository;
-import com.master.spring.spring6proj1.database.springdata.PersonSpringDataExplicitCustomRepositoryImpl;
+import com.master.spring.spring6proj1.database.springdata.PersonExplicitRepository;
 
 /**
  * We need <code>@EntityScan</code> to give it the package where it should scan
@@ -29,12 +28,12 @@ import com.master.spring.spring6proj1.database.springdata.PersonSpringDataExplic
  *
  */
 @EntityScan(basePackages = "com.master.spring.spring6proj1.database.entities")
-@EnableJpaRepositories(basePackages = "com.master.spring.spring6proj1.database.springdata", repositoryBaseClass = PersonSpringDataExplicitCustomRepositoryImpl.class)
+@EnableJpaRepositories(basePackages = "com.master.spring.spring6proj1")
 @SpringBootApplication(scanBasePackages = "com.master.spring.spring6proj1")
 public class SpringDataExplicitCustomRepoApp implements CommandLineRunner {
 
 	@Autowired
-	PersonSpringDataExplicitCustomRepository personRepository;
+	PersonExplicitRepository personRepository;
 
 	Logger logger = LoggerFactory.getLogger(this.getClass());
 

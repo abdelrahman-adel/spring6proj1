@@ -12,7 +12,7 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 
 import com.master.spring.spring6proj1.database.entities.Person;
-import com.master.spring.spring6proj1.database.springdata.PersonSpringDataImplicitCustomRepository;
+import com.master.spring.spring6proj1.database.springdata.PersonImplicitRepositoryCustom;
 
 /**
  * We need <code>@EntityScan</code> to give it the package where it should scan
@@ -30,7 +30,7 @@ import com.master.spring.spring6proj1.database.springdata.PersonSpringDataImplic
 public class SpringDataImplicitCustomRepoApp implements CommandLineRunner {
 
 	@Autowired
-	PersonSpringDataImplicitCustomRepository personRepository;
+	PersonImplicitRepositoryCustom personRepository;
 
 	Logger logger = LoggerFactory.getLogger(this.getClass());
 

@@ -19,7 +19,9 @@ import javax.persistence.NamedQuery;
 @Entity
 @NamedQueries(value = { @NamedQuery(name = "findAll", query = "select p from Person p"),
 		@NamedQuery(name = "findByName", query = "select p from Person p where name=:name"),
-		@NamedQuery(name = "findByLocation", query = "select p from Person p where location=:location") })
+		@NamedQuery(name = "findByLocation", query = "select p from Person p where location=:location"),
+		@NamedQuery(name = "findByBirthDate", query = "select p from Person p where birthDate=:birthDate"),
+		@NamedQuery(name = "findByNameAndLocation", query = "select p from Person p where name=:name and location=:location") })
 public class Person {
 
 	/**

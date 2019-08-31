@@ -12,7 +12,7 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 
 import com.master.spring.spring6proj1.database.entities.Person;
-import com.master.spring.spring6proj1.database.springdata.PersonSpringDataRepository;
+import com.master.spring.spring6proj1.database.springdata.PersonRepository;
 
 /**
  * We need <code>@EntityScan</code> to give it the package where it should scan
@@ -30,7 +30,7 @@ import com.master.spring.spring6proj1.database.springdata.PersonSpringDataReposi
 public class SpringDataApp implements CommandLineRunner {
 
 	@Autowired
-	PersonSpringDataRepository personRepository;
+	PersonRepository personRepository;
 
 	Logger logger = LoggerFactory.getLogger(this.getClass());
 

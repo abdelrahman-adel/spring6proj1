@@ -37,30 +37,30 @@ public class SpringJpaApp implements CommandLineRunner {
 	public void run(String... args) throws Exception {
 		List<Person> persons = personRepository.findAll();
 		for (Person person : persons) {
-			logger.info("personSpringDataExplicitCustomRepository.findAll() -> {}", person);
+			logger.info("personRepository.findAll() -> {}", person);
 		}
 
-		logger.info("personSpringDataExplicitCustomRepository.findById(100001) -> {}", personRepository.findById(100001));
-		logger.info("personSpringDataExplicitCustomRepository.findByName(Lotfi) -> {}", personRepository.findByName("Lotfi"));
-		logger.info("personSpringDataExplicitCustomRepository.findByLocation(UK) -> {}", personRepository.findByLocation("UK"));
+		logger.info("personRepository.findById(100001) -> {}", personRepository.findById(100001));
+		logger.info("personRepository.findByName(Lotfi) -> {}", personRepository.findByName("Lotfi"));
+		logger.info("personRepository.findByLocation(UK) -> {}", personRepository.findByLocation("UK"));
 		personRepository.deleteById(100002);
-		logger.info("personSpringDataExplicitCustomRepository.deleteById(100002), deleted 100002");
+		logger.info("personRepository.deleteById(100002), deleted 100002");
 
 		persons = personRepository.findAll();
 		for (Person person : persons) {
-			logger.info("personSpringDataExplicitCustomRepository.findAll() -> {}", person);
+			logger.info("personRepository.findAll() -> {}", person);
 		}
 
 		Person nour = new Person("Nour", "UAE", new GregorianCalendar(2005, Calendar.JUNE, 17).getTime());
-		logger.info("personSpringDataExplicitCustomRepository.insert(), row inserted: {}", personRepository.insert(nour));
+		logger.info("personRepository.insert(), row inserted: {}", personRepository.insert(nour));
 
 		Person abdo = personRepository.findById(100001);
 		abdo.setLocation("UAE");
-		logger.info("personSpringDataExplicitCustomRepository.update(), row updated: {}", personRepository.update(abdo));
+		logger.info("personRepository.update(), row updated: {}", personRepository.update(abdo));
 
 		persons = personRepository.findAll();
 		for (Person person : persons) {
-			logger.info("personSpringDataExplicitCustomRepository.findAll() -> {}", person);
+			logger.info("personRepository.findAll() -> {}", person);
 		}
 
 	}
